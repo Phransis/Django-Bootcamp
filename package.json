@@ -1,0 +1,11 @@
+{
+  "name": "bootcamp-blog",
+  "version": "1.0.0",
+  "description": "Django blog with Tailwind CSS",
+  "scripts": {
+    "build-css": "tailwindcss -i ./static/src/input.css -o ./static/dist/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

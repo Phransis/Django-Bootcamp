@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Konkonsa Categories{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'dist/output.css' %}" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+      .category-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .category-card h3 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      .category-card p {
+        color: #666;
+        font-size: 0.9rem;
+      }
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-gray-800 text-white py-4 text-center">
+      <h1 class="text-3xl font-bold">Konkonsa Categories</h1>
+    </header>
+
+    <div class="container">
+      {% block content %}
+      <div class="categories">
+        {% for category in categories %}
+        <div class="category-card">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+        </div>
+        {% empty %}
+        <p>No categories available.</p>
+        {% endfor %}
+      </div>
+      {% endblock %}
+    </div>
+
+    <footer
+      class="bg-gray-800 text-white text-center py-4 fixed bottom-0 w-full"
+    >
+      <p>&copy; 2026 Konkonsa Village. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

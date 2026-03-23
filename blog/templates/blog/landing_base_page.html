@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Konkonsa Village{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'dist/output.css' %}" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-gray-800 text-white py-4 text-center">
+      <h1 class="text-3xl font-bold">Konkonsa Village</h1>
+    </header>
+    {% comment %} <nav class="bg-gray-700 py-2">
+      <div class="container mx-auto flex justify-center">
+        <a
+          href="{% url 'blog:landing_page' %}"
+          class="text-white mx-4 hover:text-gray-300"
+          >Home</a
+        >
+        <!-- Add more links as needed -->
+      </div>
+    </nav> {% endcomment %}
+    <main class="container mx-auto py-8 px-4">
+      {% block content %}{% endblock %}
+    </main>
+    <footer
+      class="bg-gray-800 text-white text-center py-4 fixed bottom-0 w-full"
+    >
+      <p>&copy; 2026 Konkonsa Village. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
