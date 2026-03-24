@@ -1,18 +1,23 @@
-{% extends "blog/base_categories_page.html" %}
-{% block title %}View Post{% endblock %}
-{% block content %}
-  <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-    <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold">{{ post.title }}</h1>
-      {% if not post.is_published %}
-      <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">DRAFT</span>
-      {% else %}
-      <span class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">PUBLISHED</span>
-      {% endif %}
-    </div>
-    <p class="text-gray-700">{{ post.content }}</p>
-    <p class="text-sm text-gray-500 mt-2">Category: {{ post.category }}</p>
-    <p class="text-sm text-gray-500 mt-2">Author: {{ post.author.name }}</p>
-    <p class="text-sm text-gray-500 mt-2">Posted on {{ post.created_at }}</p>
+{% extends "blog/base_categories_page.html" %} {% block title %}View Post{%
+endblock %} {% block content %}
+<div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">{{ post.title }}</h1>
+    {% if not post.is_published %}
+    <span
+      class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full"
+      >DRAFT</span
+    >
+    {% else %}
+    <span
+      class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full"
+      >PUBLISHED</span
+    >
+    {% endif %}
   </div>
+  <p class="text-gray-700">{{ post.content }}</p>
+  <p class="text-sm text-gray-500 mt-2">Category: {{ post.category }}</p>
+  <p class="text-sm text-gray-500 mt-2">Author: {{ post.author.name }}</p>
+  <p class="text-sm text-gray-500 mt-2">Posted on {{ post.created_at }}</p>
+</div>
 {% endblock %}

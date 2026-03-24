@@ -7,7 +7,10 @@ Posts{% endblock %} {% block content %}
     <div class="flex items-center justify-between mb-2">
       <h2 class="text-xl font-semibold">{{ post.title }}</h2>
       {% if not post.is_published %}
-      <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded">DRAFT</span>
+      <span
+        class="inline-block bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded"
+        >DRAFT</span
+      >
       {% endif %}
     </div>
     <p class="text-gray-700">{{ post.content }}</p>
