@@ -4,7 +4,7 @@ from .models import Post, Author
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'author', 'content', 'category']
+        fields = ['title', 'author', 'content', 'category', 'is_published']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200',
@@ -20,5 +20,8 @@ class PostForm(forms.ModelForm):
             }),
             'category': forms.Select(attrs={
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200'
+            }),
+            'is_published': forms.CheckboxInput(attrs={
+                'class': 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded transition duration-200'
             }),
         }

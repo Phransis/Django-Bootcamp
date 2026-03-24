@@ -26,7 +26,14 @@ def view_post(request, pk):
 
 def edit_post(request, pk):
     instance = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/edit_post.html', {'post': instance})
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:view_post', pk=instance.pk)
+    else:
+        form = PostForm(instance=instance)
+    return render(request, 'blog/edit_post.html', {'form': form, 'post': instance})
 
 def delete_post(request, pk):
     return render(request, 'blog/delete_post.html', {'pk': pk})
