@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Delete Project</title>
+  </head>
+  <body>
+    <h1>Delete Project</h1>
+    <p>Are you sure you want to delete "{{ project.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'taskly:project_detail' project.pk %}">Cancel</a>
+  </body>
+</html>

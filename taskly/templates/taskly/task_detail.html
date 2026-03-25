@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ task.title }}</title>
+  </head>
+  <body>
+    <h1>{{ task.title }}</h1>
+    <p>{{ task.description }}</p>
+    <p>Project: {{ task.project.name }}</p>
+    <p>Start: {{ task.start_date }}</p>
+    <p>End: {{ task.end_date }}</p>
+    <p>Completed: {{ task.is_completed }}</p>
+    <a href="{% url 'taskly:task_update' task.pk %}">Edit</a>
+    <a href="{% url 'taskly:task_delete' task.pk %}">Delete</a>
+    <a href="{% url 'taskly:project_detail' task.project.pk %}"
+      >Back to Project</a
+    >
+    <h2>Subtasks</h2>
+    <ul>
+      {% for subtask in task.subtasks.all %}
+      <li>
+        <a href="{% url 'taskly:subtask_detail' subtask.pk %}"
+          >{{ subtask.title }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'taskly:subtask_create' %}">Add Subtask</a>
+  </body>
+</html>

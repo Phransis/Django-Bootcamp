@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ subtask.title }}</title>
+  </head>
+  <body>
+    <h1>{{ subtask.title }}</h1>
+    <p>Task: {{ subtask.task.title }}</p>
+    <p>Start: {{ subtask.start_date }}</p>
+    <p>End: {{ subtask.end_date }}</p>
+    <p>Completed: {{ subtask.is_completed }}</p>
+    <a href="{% url 'taskly:subtask_update' subtask.pk %}">Edit</a>
+    <a href="{% url 'taskly:subtask_delete' subtask.pk %}">Delete</a>
+    <a href="{% url 'taskly:task_detail' subtask.task.pk %}">Back to Task</a>
+  </body>
+</html>
