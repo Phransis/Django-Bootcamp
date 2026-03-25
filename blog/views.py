@@ -46,12 +46,16 @@ def post_list(request):
     return render(request, 'blog/post_list.html')
 
 def author_list(request):
-    return render(request, 'blog/author_list.html')
+    authors = Author.objects.all()
+    return render(request, 'blog/author_list.html', {'authors': authors})
 
 def view_author(request, pk):
-    instance = get_object_or_404(Post, pk=pk)
+    author = get_object_or_404(Author, pk=pk)
+    author_posts = Post.objects.filter(author=author).order_by('-created_at')
     context = {
-        'post': instance,}
+        'author': author,
+        'posts': author_posts,
+    }
     return render(request, 'blog/author_detail.html', context)
 
 def create_author(request):

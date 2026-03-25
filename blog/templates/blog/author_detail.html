@@ -1,0 +1,178 @@
+{% extends 'blog/landing_base_page.html' %} {% block title %}{{ author.name }} |
+Konkonsa Village{% endblock %} {% block content %}
+<!-- Author Hero Section -->
+<section
+  class="mb-16 rounded-3xl border border-fuchsia-500/30 bg-gradient-to-r from-indigo-600/20 via-violet-600/20 to-fuchsia-600/20 p-10 shadow-2xl backdrop-blur-sm"
+>
+  <div
+    class="flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:gap-12"
+  >
+    <!-- Avatar -->
+    <div
+      class="mb-8 flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-2xl md:mb-0"
+    >
+      <span class="text-6xl font-black text-black"
+        >{{ author.name|first|upper }}</span
+      >
+    </div>
+
+    <!-- Author Info -->
+    <div class="flex-1">
+      <h1 class="text-5xl font-black text-black mb-2">{{ author.name }}</h1>
+      <p class="text-xl font-bold text-fuchsia-400 mb-3">
+        {{ author.category|title }} Specialist
+      </p>
+      <p class="mb-4 text-slate-200">
+        <a
+          href="mailto:{{ author.email }}"
+          class="text-indigo-400 hover:text-indigo-300 transition font-semibold"
+          >{{ author.email }}</a
+        >
+      </p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-5">
+        <span
+          class="rounded-full bg-indigo-500/20 px-4 py-2 text-sm font-bold text-indigo-300 border border-indigo-500/30"
+          >Joined {{ author.created_at|date:'F Y' }}</span
+        >
+        <span
+          class="rounded-full bg-violet-500/20 px-4 py-2 text-sm font-bold text-violet-300 border border-violet-500/30"
+          >{{ posts|length }} Posts</span
+        >
+        <span
+          class="rounded-full bg-fuchsia-500/20 px-4 py-2 text-sm font-bold text-fuchsia-300 border border-fuchsia-500/30"
+          >{{ author.category }}</span
+        >
+      </div>
+
+      <p class="text-lg text-slate-200 leading-relaxed max-w-2xl">
+        A passionate {{ author.category|lower }} writer creating compelling
+        stories and sharing expertise with readers worldwide
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Posts Section -->
+<section class="mb-16">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-black md:text-4xl">
+      Featured Posts by {{ author.name }}
+    </h2>
+    <p class="mt-2 text-base text-slate-300">Recent articles and stories</p>
+    <div
+      class="mt-4 h-1 w-24 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 rounded-full"
+    ></div>
+  </div>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {% for post in posts %}
+    <article
+      class="group rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-800 to-slate-900 p-6 shadow-xl transition-all hover:-translate-y-2 hover:shadow-2xl hover:border-fuchsia-500/50"
+    >
+      <!-- Category & Status -->
+      <div class="mb-4 flex items-center justify-between gap-2">
+        <span
+          class="inline-flex items-center rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-indigo-300 border border-indigo-500/30"
+          >{{ post.category|title }}</span
+        >
+        {% if not post.is_published %}
+        <span
+          class="inline-block bg-red-500/20 text-red-300 text-xs font-bold px-2 py-1 rounded-full border border-red-500/30"
+          >DRAFT</span
+        >
+        {% endif %}
+      </div>
+
+      <!-- Title -->
+      <h3
+        class="text-xl font-bold text-black leading-snug mb-3 group-hover:text-fuchsia-400 transition"
+      >
+        <a href="{% url 'blog:view_post' post.pk %}">{{ post.title }}</a>
+      </h3>
+
+      <!-- Excerpt -->
+      <p class="text-sm text-slate-300 leading-relaxed mb-5">
+        {{ post.content|truncatechars:150 }}
+      </p>
+
+      <!-- Date -->
+      <p class="text-xs text-slate-400 font-medium mb-4">
+        {{ post.created_at|date:'M d, Y' }}
+      </p>
+
+      <!-- Read More Button -->
+      <a
+        href="{% url 'blog:view_post' post.pk %}"
+        class="inline-block rounded-lg bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-4 py-2 text-xs font-bold text-black hover:shadow-lg transition-all hover:scale-105"
+        >Read Story →</a
+      >
+    </article>
+    {% empty %}
+    <div
+      class="rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-800 to-slate-900 p-8 col-span-full text-center"
+    >
+      <svg
+        class="w-16 h-16 mx-auto text-slate-600 mb-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+        ></path>
+      </svg>
+      <p class="text-lg text-slate-300 font-semibold mb-2">No posts yet</p>
+      <p class="text-slate-400">
+        {{ author.name }} is working on their first story
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Collaboration CTA -->
+<section
+  class="rounded-2xl border border-fuchsia-500/30 bg-gradient-to-r from-indigo-600/30 via-violet-600/30 to-fuchsia-600/30 p-10 text-center"
+>
+  <h3 class="text-3xl font-black text-black mb-3">
+    Interested in Collaborating?
+  </h3>
+  <p class="text-slate-200 mb-6 max-w-2xl mx-auto">
+    Reach out directly to {{ author.name }} to discuss collaboration
+    opportunities, guest posts, or partnerships.
+  </p>
+  <a
+    href="mailto:{{ author.email }}"
+    class="inline-block rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-8 py-3 text-sm font-bold text-black shadow-lg hover:shadow-xl transition-all hover:scale-105"
+    >Send an Email →</a
+  >
+</section>
+
+<!-- Back Link -->
+<div class="mt-10 text-center">
+  <a
+    href="{% url 'blog:author_list' %}"
+    class="inline-flex items-center text-slate-300 hover:text-black transition font-semibold"
+  >
+    <svg
+      class="w-4 h-4 mr-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"
+      ></path>
+    </svg>
+    Back to All Authors
+  </a>
+</div>
+{% endblock %}
