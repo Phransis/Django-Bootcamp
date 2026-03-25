@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Author, Post
@@ -36,7 +38,9 @@ def edit_post(request, pk):
     return render(request, 'blog/edit_post.html', {'form': form, 'post': instance})
 
 def delete_post(request, pk):
-    return render(request, 'blog/delete_post.html', {'pk': pk})
+    instance = get_object_or_404(Post, pk=pk)
+    instance.delete()
+    return redirect('blog:landing_page')
 
 def post_list(request):
     return render(request, 'blog/post_list.html')
@@ -45,16 +49,36 @@ def author_list(request):
     return render(request, 'blog/author_list.html')
 
 def view_author(request, pk):
-    return render(request, 'blog/author_detail.html', {'pk': pk})
+    instance = get_object_or_404(Post, pk=pk)
+    context = {
+        'post': instance,}
+    return render(request, 'blog/author_detail.html', context)
 
 def create_author(request):
-    return render(request, 'blog/create_author.html')
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:landing_page')
+    else:
+        form = PostForm()
+    return render(request, 'blog/create_author.html', {'form': form})
 
 def edit_author(request, pk):
-    return render(request, 'blog/edit_author.html', {'pk': pk})
+    instance = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:view_post', pk=instance.pk)
+    else:
+        form = PostForm(instance=instance)
+    return render(request, 'blog/edit_author.html', {'form': form, 'post': instance})
 
 def delete_author(request, pk):
-    return render(request, 'blog/delete_author.html', {'pk': pk})
+    instance = get_object_or_404(Post, pk=pk)
+    instance.delete()
+    return redirect('blog/delete_author.html')
 
 def technology_posts(request):
     posts = Post.objects.filter(category='TECHNOLOGY')
