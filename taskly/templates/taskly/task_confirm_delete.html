@@ -1,6 +1,6 @@
 {% extends 'taskly/base.html' %} {% block content %}
 <div class="min-h-screen bg-slate-100 py-10">
-  <div class="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-lg">
+  <div class="mx-auto max-w-md rounded-3xl bg-black p-8 shadow-lg">
     <div
       class="mb-5 rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-700"
     >
@@ -14,7 +14,7 @@
       {% csrf_token %}
       <button
         type="submit"
-        class="flex-1 rounded-xl bg-rose-600 px-4 py-2 text-white hover:bg-rose-500"
+        class="flex-1 rounded-xl bg-rose-600 px-4 py-2 text-black hover:bg-rose-500"
       >
         Yes, delete
       </button>
