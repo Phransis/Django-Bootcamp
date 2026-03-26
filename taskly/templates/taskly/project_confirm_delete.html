@@ -1,15 +1,29 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Delete Project</title>
-  </head>
-  <body>
-    <h1>Delete Project</h1>
-    <p>Are you sure you want to delete "{{ project.name }}"?</p>
-    <form method="post">
+{% extends 'taskly/base.html' %} {% block content %}
+<div class="min-h-screen bg-slate-100 py-10">
+  <div class="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-lg">
+    <div
+      class="mb-5 rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-700"
+    >
+      <h2 class="text-xl font-semibold">Confirm Deletion</h2>
+      <p class="mt-2 text-sm">
+        You are about to permanently delete the project
+        <strong>{{ project.name }}</strong>. This cannot be undone.
+      </p>
+    </div>
+    <form method="post" class="flex gap-3">
       {% csrf_token %}
-      <button type="submit">Yes, Delete</button>
+      <button
+        type="submit"
+        class="flex-1 rounded-xl bg-rose-600 px-4 py-2 text-white hover:bg-rose-500"
+      >
+        Yes, delete
+      </button>
+      <a
+        href="{% url 'taskly:project_detail' project.pk %}"
+        class="flex-1 rounded-xl border border-slate-300 px-4 py-2 text-center text-slate-700 hover:bg-slate-100"
+        >Cancel</a
+      >
     </form>
-    <a href="{% url 'taskly:project_detail' project.pk %}">Cancel</a>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}

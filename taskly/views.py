@@ -3,7 +3,7 @@ from .models import Project, Task, SubTask
 from .forms import ProjectForm, TaskForm, SubTaskForm
 
 def project_list(request):
-    projects = Project.objects.all()
+    projects = Project.objects.order_by('-created_at')[:5]
     return render(request, 'taskly/project_list.html', {'projects': projects})
 
 def project_detail(request, pk):
