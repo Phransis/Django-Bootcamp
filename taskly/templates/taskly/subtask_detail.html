@@ -24,7 +24,10 @@
     <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
       <div class="text-sm text-slate-700">
         Status:
-        <span class="font-semibold {% if subtask.is_completed %}text-emerald-600{% else %}text-amber-600{% endif %}">{% if subtask.is_completed %}Completed{% else %}Open{% endif %}</span>
+        <span
+          class="font-semibold {% if subtask.is_completed %}text-emerald-600{% else %}text-amber-600{% endif %}"
+          >{% if subtask.is_completed %}Completed{% else %}Open{% endif %}</span
+        >
       </div>
       <div class="mt-3 text-sm text-slate-500">
         Start: {{ subtask.start_date }} · End: {{ subtask.end_date }}

@@ -24,7 +24,13 @@
       <div class="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
         <span>Start: {{ task.start_date }}</span>
         <span>End: {{ task.end_date }}</span>
-        <span>Status:<strong class="{% if task.is_completed %}text-emerald-600{% else %}text-amber-600{% endif %}"> {% if task.is_completed %}Completed{% else %}Open{% endif %}</strong></span>
+        <span
+          >Status:<strong
+            class="{% if task.is_completed %}text-emerald-600{% else %}text-amber-600{% endif %}"
+          >
+            {% if task.is_completed %}Completed{% else %}Open{% endif %}</strong
+          ></span
+        >
       </div>
     </div>
     <section class="mt-8">
@@ -44,7 +50,8 @@
         >
           <div class="font-medium text-slate-900">{{ subtask.title }}</div>
           <div class="text-sm text-slate-500">
-            Status: {% if subtask.is_completed %}Done{% else %}Pending{% endif %}
+            Status: {% if subtask.is_completed %}Done{% else %}Pending{% endif
+            %}
           </div>
         </a>
         {% empty %}
