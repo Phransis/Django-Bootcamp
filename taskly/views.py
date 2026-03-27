@@ -3,8 +3,20 @@ from .models import Project, Task, SubTask
 from .forms import ProjectForm, TaskForm, SubTaskForm
 
 def project_list(request):
-    projects = Project.objects.order_by('-created_at')[:5]
-    return render(request, 'taskly/project_list.html', {'projects': projects})
+    search_query = request.GET.get('search', '')
+    if search_query:
+        projects = Project.objects.filter(
+            name__icontains=search_query
+        ) | Project.objects.filter(
+            description__icontains=search_query
+        )
+    else:
+        projects = Project.objects.all()
+
+    return render(request, 'taskly/project_list.html', {
+        'projects': projects,
+        'search_query': search_query
+    })
 
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
