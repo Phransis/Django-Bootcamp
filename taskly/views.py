@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from .models import Project, Task, SubTask
 from .forms import ProjectForm, TaskForm, SubTaskForm
 
@@ -12,6 +14,14 @@ def project_list(request):
         )
     else:
         projects = Project.objects.all()
+
+    # Handle AJAX requests
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string('taskly/project_list_results.html', {
+            'projects': projects,
+            'search_query': search_query
+        })
+        return JsonResponse({'html': html, 'count': projects.count()})
 
     return render(request, 'taskly/project_list.html', {
         'projects': projects,
