@@ -128,3 +128,5 @@ STATICFILES_DIRS = [
 
 # Tailwind Configuration
 TAILWIND_APP_NAME = 'theme'
+
+AUTH_USER_MODEL = 'makola.Profile'
