@@ -10,7 +10,7 @@ class Profile(AbstractUser):
         ('seller', 'Seller'),
     )
     name = models.CharField(max_length=100)
-    username = models.CharField(max_length=150, unique=True, default='User')
+    username = models.CharField(max_length=150, unique=True)
     phone_number = models.CharField(max_length=20)
     address = models.CharField(max_length=255)
     # profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
