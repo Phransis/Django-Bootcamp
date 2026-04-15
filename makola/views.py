@@ -65,3 +65,33 @@ class ProductDeleteView(ListView):
     message = 'Are you sure you want to delete this product?'
     success_url = '/products/'  # Redirect to product list after successful deletion
     
+
+class CategoryListView(ListView):
+    model = Profile
+    template_name = 'makola/category_list.html'
+    context_object_name = 'categories'
+
+class CategoryDetailView(ListView):
+    model = Profile
+    template_name = 'makola/category_detail.html'
+    context_object_name = 'category'
+
+class CategoryCreateView(ListView):
+    model = Profile
+    template_name = 'makola/category_create.html'
+    context_object_name = 'category'
+    success_url = '/categories/'  # Redirect to category list after successful creation
+
+class CategoryUpdateView(ListView):
+    model = Profile
+    template_name = 'makola/category_update.html'
+    context_object_name = 'category'
+    success_url = '/categories/'  # Redirect to category list after successful update
+
+class CategoryDeleteView(ListView):
+    model = Profile
+    template_name = 'makola/category_delete.html'
+    context_object_name = 'category'
+    message = 'Are you sure you want to delete this category?'
+    success_url = '/categories/'  # Redirect to category list after successful deletion
+
