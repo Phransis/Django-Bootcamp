@@ -1,0 +1,72 @@
+{% comment %} {% load static %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Makola Marketplace{% endblock %}</title>
+    {% load static %}
+    {% comment %} <title>Makola Marketplace</title> {% endcomment %}
+
+    <link href="{% static 'dist/output.css' %}" rel="stylesheet">
+</head>
+
+<body class="bg-black-50 text-black-800">
+
+<!-- 🌐 NAVBAR -->
+<nav class="bg-black shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-green-600">Makola</h1>
+
+        <div class="space-x-6 hidden md:flex">
+            <a href="#" class="hover:text-green-600">Home</a>
+            <a href="#" class="hover:text-green-600">Products</a>
+            <a href="#" class="hover:text-green-600">Vendors</a>
+            <a href="#" class="hover:text-green-600">Contact</a>
+        </div>
+
+        <div class="space-x-3">
+            <a href="{% url 'makola:homepage' %}" class="px-4 py-2 border rounded">Login</a>
+            <a href="{% url 'makola:homepage' %}" class="px-4 py-2 bg-green-600 text-black rounded">Sign Up</a>
+            {% comment %} <a href="{% url 'login' %}" class="px-4 py-2 border rounded">Login</a>
+            <a href="{% url 'register' %}" class="px-4 py-2 bg-green-600 text-black rounded">Sign Up</a> {% endcomment %}
+        </div>
+    </div>
+</nav>
+
+<!-- 🧩 CONTENT -->
+{% block content %}
+{% endblock %}
+<!-- ⚫ FOOTER -->
+<footer class="bg-black-900 text-black py-10">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+
+        <div>
+            <h2 class="text-xl font-bold mb-3">Makola</h2>
+            <p>Your trusted online marketplace.</p>
+        </div>
+
+        <div>
+            <h3 class="font-semibold mb-3">Links</h3>
+            <ul class="space-y-2">
+                <li><a href="{% url 'makola:list-products' %}">Products</a></li>
+                {% comment %} <li><a href="{% url 'makola:vendors' %}">Vendors</a></li>
+                <li><a href="{% url 'makola:support' %}">Support</a></li> {% endcomment %}
+            </ul>
+        </div>
+
+        <div>
+            <h3 class="font-semibold mb-3">Contact</h3>
+            <p>Email: support@makola.com</p>
+            <p>Phone: +233 27-805-8058</p>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-6 text-black-400">
+        © 2026 Makola Marketplace. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "makola/base.html" %}
+{% block title %}Category List - Makola Marketplace{% endblock %}
+
+{% block content %}
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <h2 class="text-2xl font-bold mb-4">Categories</h2>
+        <ul>
+            {% for category in object_list %}
+                <li>
+                    <a href="{% url 'makola:category-detail' pk=category.pk %}">{{ category.name }}</a>
+                    {% comment %} <p>{{ category.description }}</p> {% endcomment %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

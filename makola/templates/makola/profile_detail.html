@@ -1,0 +1,13 @@
+{% extends "makola/base.html" %}
+{% block title %}Profile Detail - Makola Marketplace{% endblock %}
+
+{% block content %}
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <h2 class="text-2xl font-bold mb-4">Profile Detail</h2>
+        <p><strong>Name:</strong> {{ object.name }}</p>
+        <p><strong>Email:</strong> {{ object.email }}</p>
+        <p><strong>Phone:</strong> {{ object.phone_number }}</p>
+        <a href="{% url 'makola:update-profile' object.pk %}" class="px-4 py-2 bg-blue-600 text-black rounded">Update Profile</a>
+        <a href="{% url 'makola:delete-profile' object.pk %}" class="px-4 py-2 bg-red-600 text-black rounded">Delete Profile</a>
+    </div>
+{% endblock %}

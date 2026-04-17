@@ -1,11 +1,122 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Makola</title>
-</head>
-<body>
-    <h1>Welcome to Makola</h1>
-    <p>This is your go to marketplace.</p>
-</body>
-</html>
+
+{% extends "makola/base.html" %}
+
+{% block content %}
+<!-- 🚀 HERO SECTION -->
+<section class="bg-gradient-to-r from-green-500 to-green-700 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center">
+
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                Buy & Sell Anything in Makola 🛍️
+            </h1>
+            <p class="text-lg mb-6">
+                A multi-tenant marketplace connecting buyers and vendors across Ghana.
+                Discover products, grow your business, and trade with ease.
+            </p>
+
+            <div class="space-x-4">
+                <a href="#" class="bg-white text-green-700 px-6 py-3 rounded font-semibold">
+                    Start Shopping
+                </a>
+                <a href="#" class="border border-white px-6 py-3 rounded font-semibold">
+                    Become a Vendor
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f"
+                 class="rounded-xl shadow-lg" alt="Marketplace">
+        </div>
+
+    </div>
+</section>
+
+<!-- 🧩 FEATURES -->
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+
+        <h2 class="text-3xl font-bold mb-10">Why Choose Makola?</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h3 class="text-xl font-semibold mb-3">Multi-Vendor Platform</h3>
+                <p>Vendors can create shops and sell products easily.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h3 class="text-xl font-semibold mb-3">Secure Payments</h3>
+                <p>Integrated payment systems for safe transactions.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h3 class="text-xl font-semibold mb-3">Fast Delivery</h3>
+                <p>Quick and reliable delivery services across regions.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 🛍️ FEATURED PRODUCTS -->
+<section class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-3xl font-bold mb-10 text-center">Featured Products</h2>
+
+        <div class="grid md:grid-cols-4 gap-6">
+
+            {% for product in products %}
+            <div class="bg-white rounded-xl shadow p-4">
+                <img src="https://via.placeholder.com/300"
+                     class="rounded mb-4" alt="Product">
+
+                <h3 class="font-semibold">{{ product.name }}</h3>
+                <p class="text-green-600 font-bold">GH₵ {{ product.price }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<!-- 🏪 CALL TO ACTION -->
+<section class="py-16 text-center">
+    <div class="max-w-3xl mx-auto">
+
+        <h2 class="text-3xl font-bold mb-4">
+            Ready to Grow Your Business?
+        </h2>
+
+        <p class="mb-6">
+            Join thousands of vendors selling on Makola today.
+        </p>
+
+        <a href="#" class="bg-green-600 text-white px-6 py-3 rounded">
+            Become a Vendor
+        </a>
+
+    </div>
+</section>
+
+<!-- 📩 NEWSLETTER -->
+<section class="bg-green-600 text-white py-12">
+    <div class="max-w-4xl mx-auto text-center">
+
+        <h2 class="text-2xl font-bold mb-4">Stay Updated</h2>
+        <p class="mb-6">Get the latest deals and offers</p>
+
+        <form class="flex flex-col md:flex-row gap-4 justify-center">
+            <input type="email" placeholder="Enter your email"
+                   class="px-4 py-2 rounded text-black w-full md:w-1/2">
+
+            <button class="bg-white text-green-600 px-6 py-2 rounded">
+                Subscribe
+            </button>
+        </form>
+
+    </div>
+</section>
+{% endblock %}
