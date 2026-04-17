@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'makola'
 urlpatterns = [
-    path('', views.homepage, name='homepage'),
+    path('', views.HomepageView.as_view(), name='homepage'),
     path('profile/list/', views.ProfileListView.as_view(), name='list-profiles'), 
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile-detail'),
     path('profile/create/', views.ProfileCreateView.as_view(), name='create-profile'),

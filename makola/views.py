@@ -5,8 +5,14 @@ from makola.models import Category, Product, Profile
 
 # Create your views here.
 
-def homepage(request):
-    return render(request, 'makola/homepage.html')
+# def homepage(request):
+#     products = Product.objects.all()[:8]  # Fetch the first 8 products for display
+#     return render(request, 'makola/homepage.html', {'products': products})
+
+class HomepageView(ListView):
+    model = Product
+    template_name = 'makola/homepage.html'
+    context_object_name = 'products'
 
 class ProfileListView(ListView):
     model = Profile
