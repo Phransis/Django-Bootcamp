@@ -13,11 +13,15 @@ class HomepageView(ListView):
     model = Product
     template_name = 'makola/homepage.html'
     context_object_name = 'products'
+    queryset = Product.objects.all()[:8]  # Fetch the first 8 products for display
+    ordering = ['-created_at']  # Order products by creation date (newest first)
 
 class ProfileListView(ListView):
     model = Profile
     template_name = 'makola/profile_list.html'
     context_object_name = 'profiles'
+    paginate_by = 10  # Display 10 profiles per page
+    ordering = ['-created_at']  # Order profiles by creation date (newest first)
 
 class ProfileDetailView(DetailView):
     model = Profile
@@ -49,6 +53,10 @@ class ProductListView(ListView):
     model = Product
     template_name = 'makola/product_list.html'
     context_object_name = 'products'
+    paginate_by = 10  # Display 10 products per page
+    queryset = Product.objects.select_related('category')  # Use select_related to optimize database queries by fetching related category data in a single query
+    ordering = ['-created_at']  # Order products by creation date (newest first)
+
 
 class ProductDetailView(DetailView):
     model = Product
