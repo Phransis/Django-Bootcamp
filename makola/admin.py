@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Profile, Product, Category
+from .models import Profile, Product, Category, Shop
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -21,3 +21,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'created_at')
     search_fields = ('name', 'description')
     list_filter = ('created_at', 'description')
+
+@admin.register(Shop)
+class ShopAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'owner', 'created_at')
+    search_fields = ('name', 'description')
+    list_filter = ('owner', 'created_at')
