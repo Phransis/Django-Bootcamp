@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from makola.models import Category, Product, Profile
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -28,21 +29,21 @@ class ProfileDetailView(DetailView):
     template_name = 'makola/profile_detail.html'
     context_object_name = 'profile'
 
-class ProfileCreateView(CreateView):
+class ProfileCreateView(LoginRequiredMixin, CreateView):
     model = Profile
     template_name = 'makola/profile_create.html'
     fields = ['name', 'username', 'phone_number', 'email', 'password', 'address', 'bio', 'user_type']
     context_object_name = 'profile'
     success_url = reverse_lazy('makola:list-profiles')  # Redirect to profile list after successful creation
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     template_name = 'makola/profile_edit.html'
     fields = ['name', 'phone_number', 'address', 'bio', 'user_type']
     context_object_name = 'profile'
     success_url = reverse_lazy('makola:list-profiles')  # Redirect to profile list after successful update
 
-class ProfileDeleteView(DeleteView):
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
     model = Profile
     template_name = 'makola/profile_delete.html'
     context_object_name = 'profile'
@@ -63,21 +64,21 @@ class ProductDetailView(DetailView):
     template_name = 'makola/product_detail.html'
     context_object_name = 'product'
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = 'makola/product_create.html'
     fields = ['name', 'description', 'price', 'category', 'image']
     context_object_name = 'product'
     success_url = reverse_lazy('makola:list-products')  # Redirect to product list after successful creation
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     template_name = 'makola/product_update.html'
     fields = ['name', 'description', 'price', 'category', 'image']
     context_object_name = 'product'
     success_url = reverse_lazy('makola:list-products')  # Redirect to product list after successful update
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'makola/product_delete.html'
     context_object_name = 'product'
@@ -95,21 +96,21 @@ class CategoryDetailView(DetailView):
     template_name = 'makola/category_detail.html'
     context_object_name = 'category'
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     template_name = 'makola/category_create.html'
     fields = ['name', 'description']
     context_object_name = 'category'
     success_url = reverse_lazy('makola:list-categories')  # Redirect to category list after successful creation
 
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     template_name = 'makola/category_update.html'
     fields = ['name', 'description']
     context_object_name = 'category'
     success_url = reverse_lazy('makola:list-categories')  # Redirect to category list after successful update
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = 'makola/category_delete.html'
     context_object_name = 'category'
