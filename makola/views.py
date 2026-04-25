@@ -66,14 +66,14 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
     model = Product
     template_name = 'makola/product_create.html'
-    fields = ['name', 'description', 'price', 'category']
+    fields = ['name', 'description', 'price', 'category', 'image']
     context_object_name = 'product'
     success_url = reverse_lazy('makola:list-products')  # Redirect to product list after successful creation
 
 class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'makola/product_update.html'
-    fields = ['name', 'description', 'price', 'category']
+    fields = ['name', 'description', 'price', 'category', 'image']
     context_object_name = 'product'
     success_url = reverse_lazy('makola:list-products')  # Redirect to product list after successful update
 

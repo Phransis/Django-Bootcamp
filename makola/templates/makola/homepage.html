@@ -70,12 +70,20 @@
 
             {% for product in products %}
             <div class="bg-black rounded-xl shadow p-4">
-                <img src="https://via.placeholder.com/300"
-                     class="rounded mb-4" alt="Product">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded mb-4">
+                {% else %}
+                    <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Product">
+                {% endif %}
 
                 <h3 class="font-semibold">{{ product.name }}</h3>
                 <p class="text-sm mb-2">{{ product.description|truncatechars:100 }}</p>
                 <p class="text-green-600 font-bold">GH₵ {{ product.price|floatformat:2 }}</p>
+                <a href="{% url 'makola:product-detail' product.pk %}"
+                   class="mt-4 inline-block bg-green-600 text-black px-4 py-2 rounded">
+                    View Details
+                </a>
+
             </div>
             {% endfor %}
 

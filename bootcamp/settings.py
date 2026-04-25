@@ -130,3 +130,6 @@ STATICFILES_DIRS = [
 TAILWIND_APP_NAME = 'theme'
 
 AUTH_USER_MODEL = 'makola.Profile'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
