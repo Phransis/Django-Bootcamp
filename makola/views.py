@@ -14,8 +14,10 @@ class HomepageView(ListView):
     model = Product
     template_name = 'makola/homepage.html'
     context_object_name = 'products'
-    queryset = Product.objects.all()[:8]  # Fetch the first 8 products for display
-    ordering = ['-created_at']  # Order products by creation date (newest first)
+
+    def get_queryset(self):
+        # Order first, then limit to the first 8 products
+        return Product.objects.order_by('-created_at')[:8]
 
 class ProfileListView(ListView):
     model = Profile
