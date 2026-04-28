@@ -8,7 +8,7 @@
             {% for product in object_list %}
                 <div class="border rounded-lg p-4">
                     <h3 class="text-xl font-bold">{{ product.name }}</h3>
-                    <p class="text-lg">${{ product.price|floatformat:2 }}</p>
+                    <p class="text-lg">GH₵{{ product.price|floatformat:2 }}</p>
                     <p>{{ product.description }}</p>
                     {% if product.image %}
                         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="mt-4 max-w-full h-auto">

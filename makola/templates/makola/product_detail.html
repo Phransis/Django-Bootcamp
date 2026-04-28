@@ -4,7 +4,7 @@
 {% block content %}
     <div class="max-w-7xl mx-auto px-6 py-8">
         <h2 class="text-2xl font-bold mb-4">{{ object.name }}</h2>
-        <p class="text-lg">${{ object.price|floatformat:2 }}</p>
+        <p class="text-lg">GH₵{{ object.price|floatformat:2 }}</p>
         <p>{{ object.description }}</p>
         {% if object.image %}
             <img src="{{ object.image.url }}" alt="{{ object.name }}" class="mt-4 max-w-full h-auto">
