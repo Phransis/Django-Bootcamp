@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from makola.models import Category, Product, Profile
+from makola.forms import ProfileCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView as AuthLoginView, LogoutView
 
 # Create your views here.
 
@@ -20,11 +21,10 @@ class HomepageView(ListView):
         # Order first, then limit to the first 8 products
         return Product.objects.order_by('-created_at')[:8]
 
-class LoginView(CreateView):
-    model = Profile
+class LoginView(AuthLoginView):
     template_name = 'makola/login.html'
-    fields = ['username', 'password']
-    success_url = reverse_lazy('makola:homepage')  # Redirect to homepage after successful login
+    redirect_authenticated_user = True
+    next_page = reverse_lazy('makola:homepage')
 
 class LogoutView(LogoutView):
     next_page = reverse_lazy('makola:homepage')
@@ -36,17 +36,31 @@ class ProfileListView(ListView):
     paginate_by = 10  # Display 10 profiles per page
     ordering = ['-created_at']  # Order profiles by creation date (newest first)
 
+class BuyerDashboardView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'makola/buyer_dashboard.html'
+    context_object_name = 'products'
+    paginate_by = 10  # Display 10 products per page
+    ordering = ['-created_at']  # Order products by creation date (newest first)
+
+class SellerDashboardView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'makola/seller_dashboard.html'
+    context_object_name = 'products'
+    paginate_by = 10  # Display 10 products per page
+    ordering = ['-created_at']  # Order products by creation date (newest first)
+
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'makola/profile_detail.html'
     context_object_name = 'profile'
 
-class ProfileCreateView(LoginRequiredMixin, CreateView):
+class ProfileCreateView(CreateView):
     model = Profile
+    form_class = ProfileCreationForm
     template_name = 'makola/profile_create.html'
-    fields = ['name', 'username', 'phone_number', 'email', 'password', 'address', 'bio', 'user_type']
     context_object_name = 'profile'
-    success_url = reverse_lazy('makola:list-profiles')  # Redirect to profile list after successful creation
+    success_url = reverse_lazy('makola:login')  # Redirect to login page after successful creation
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
