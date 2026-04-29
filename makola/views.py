@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from makola.models import Category, Product, Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LogoutView
 
 # Create your views here.
 
@@ -18,6 +19,15 @@ class HomepageView(ListView):
     def get_queryset(self):
         # Order first, then limit to the first 8 products
         return Product.objects.order_by('-created_at')[:8]
+
+class LoginView(CreateView):
+    model = Profile
+    template_name = 'makola/login.html'
+    fields = ['username', 'password']
+    success_url = reverse_lazy('makola:homepage')  # Redirect to homepage after successful login
+
+class LogoutView(LogoutView):
+    next_page = reverse_lazy('makola:homepage')
 
 class ProfileListView(ListView):
     model = Profile

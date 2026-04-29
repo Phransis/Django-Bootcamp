@@ -134,5 +134,5 @@ AUTH_USER_MODEL = 'makola.Profile'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-LOGIN_URL = '/admin/login/'  # where to go for login
-LOGIN_REDIRECT_URL = '/'  # where to go after login
+LOGIN_URL = '/makola/login/'  # where to go for login
+LOGIN_REDIRECT_URL = '/makola/'  # where to go after login

@@ -1,0 +1,54 @@
+{% extends "makola/base.html" %}
+{% block title %}Login - Makola{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-black p-8 rounded-2xl shadow-lg w-full max-w-md">
+
+        <h2 class="text-3xl font-bold text-center mb-6 text-green-600">
+            Welcome Back 👋
+        </h2>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div>
+                <label class="block mb-1 font-semibold">Username</label>
+                <input type="text" name="username" required
+                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500">
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="block mb-1 font-semibold">Password</label>
+                <input type="password" name="password" required
+                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500">
+            </div>
+
+            <!-- Errors -->
+            {% if form.errors %}
+                <p class="text-red-500 text-sm">Invalid username or password</p>
+            {% endif %}
+
+            <!-- Submit -->
+            <button class="w-full bg-green-600 text-black py-2 rounded-lg hover:bg-green-700 transition">
+                Login
+            </button>
+        </form>
+
+        <!-- Extra Links -->
+        <div class="text-center mt-4 text-sm">
+            <p>
+                Don’t have an account?
+                <a href="{% url 'makola:create-profile' %}" class="text-green-600 font-semibold">
+                    Register
+                </a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

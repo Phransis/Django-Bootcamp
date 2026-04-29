@@ -26,10 +26,20 @@
         </div>
 
         <div class="space-x-3">
-            <a href="{% url 'makola:homepage' %}" class="px-4 py-2 border rounded">Login</a>
-            <a href="{% url 'makola:homepage' %}" class="px-4 py-2 bg-green-600 text-black rounded">Sign Up</a>
-            {% comment %} <a href="{% url 'login' %}" class="px-4 py-2 border rounded">Login</a>
-            <a href="{% url 'register' %}" class="px-4 py-2 bg-green-600 text-black rounded">Sign Up</a> {% endcomment %}
+{% if user.is_authenticated %}
+
+    {% if user.user_type == 'seller' %}
+        <a href="{% url 'makola:seller-dashboard' %}">Dashboard</a>
+    {% else %}
+        <a href="{% url 'makola:buyer-dashboard' %}">Dashboard</a>
+    {% endif %}
+
+    <a href="{% url 'makola:logout' %}">Logout</a>
+
+{% else %}
+    <a href="{% url 'makola:login' %}">Login</a>
+    <a href="{% url 'makola:register' %}">Register</a>
+{% endif %}
         </div>
     </div>
 </nav>

@@ -4,6 +4,8 @@ from . import views
 app_name = 'makola'
 urlpatterns = [
     path('', views.HomepageView.as_view(), name='homepage'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
     path('profile/list/', views.ProfileListView.as_view(), name='list-profiles'), 
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile-detail'),
     path('profile/create/', views.ProfileCreateView.as_view(), name='create-profile'),
