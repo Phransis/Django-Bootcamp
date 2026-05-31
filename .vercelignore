@@ -1,0 +1,9 @@
+.venv
+venv
+node_modules
+npm-debug.log
+pnpm-lock.yaml
+yarn.lock
+db.sqlite3
+*.pyc
+__pycache__
