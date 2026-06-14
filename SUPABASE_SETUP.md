@@ -10,4 +10,4 @@ npx skills add supabase/agent-skills
 
 Notes:
 - Add `DATABASE_URL` to your Vercel environment variables for production.
-- Keep `SUPABASE_KEY` and `DJANGO_SECRET_KEY` secret (do not commit).
+- Keep `SUPABASE_KEY` and `DJANGO_SECRET_KEY` secret (do not commit)
