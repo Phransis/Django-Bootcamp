@@ -93,10 +93,13 @@ WSGI_APPLICATION = 'bootcamp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+print("DATABASE_URL =", os.environ.get("DATABASE_URL"))
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{(BASE_DIR / 'db.sqlite3').as_posix()}",
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
+        ssl_require=True,
     )
 }
 
