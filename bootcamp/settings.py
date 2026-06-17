@@ -53,11 +53,13 @@ INSTALLED_APPS = [
 
     'theme',
     'tailwind',
+    'rest_framework',
 
     'blog',
     'taskly',
     'makola',
-    'taskman'
+    'taskman',
+    'payments',
 
 ]
 

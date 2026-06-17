@@ -25,6 +25,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('taskly/', include('taskly.urls')),
     path('makola/', include('makola.urls')),
+    # path('taskman/', include('taskman.urls')),
+    path('payments/', include('payments.urls')),
 ]
 
 if settings.DEBUG:
