@@ -1,25 +1,22 @@
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.generic import CreateView
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from payments.models import Payment
+from payments.serializers import PaymentSerializer
 
+class PaymentAPIView(APIView):
 
-# Create your views here.
+    def post(self, request):
+        serializer = PaymentSerializer(data=request.data)
 
-class PaymentView(CreateView):
-    model = Payment
-    fields = ['amount']
-    # template_name = 'payments/payment_form.html'
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # def form_valid(self, form):
-    #     return JsonResponse({'message': 'Payment processed successfully'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-def payment_success(request, *args, **kwargs):
-    response_data = {
-        'message': 'Payment processed successfully',
-        'status': 'success',
-        'code': 200
-    }
-    return JsonResponse(response_data)
+    def get(self, request):
+        payments = Payment.objects.order_by('-timestamp')
+        serializer = PaymentSerializer(payments, many=True)
+        return Response(serializer.data)
+    

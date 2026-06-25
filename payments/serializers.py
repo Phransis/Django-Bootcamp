@@ -7,11 +7,11 @@ class PaymentSerializer(serializers.ModelSerializer):
         model = Payment
         fields = '__all__'
 
-    def create(self, validated_data):
-        payment = Payment.objects.create(**validated_data)
-        return payment
+    # def create(self, validated_data):
+    #     payment = Payment.objects.create(**validated_data)
+    #     return payment
     
-    def update(self, instance, validated_data):
-        instance.amount = validated_data.get('amount', instance.amount)
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.amount = validated_data.get('amount', instance.amount)
+    #     instance.save()
+    #     return instance
