@@ -16,5 +16,10 @@ class PaymentView(CreateView):
     #     return JsonResponse({'message': 'Payment processed successfully'})
 
 
-def payment_success(request):
-    return JsonResponse({'message': 'Payment processed successfully'})
+def payment_success(request, *args, **kwargs):
+    response_data = {
+        'message': 'Payment processed successfully',
+        'status': 'success',
+        'code': 200
+    }
+    return JsonResponse(response_data)

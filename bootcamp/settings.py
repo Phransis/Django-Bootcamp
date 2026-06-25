@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'theme',
     'tailwind',
     'rest_framework',
+    'drf_spectacular',
 
     'blog',
     'taskly',
@@ -161,3 +162,13 @@ LOGIN_REDIRECT_URL = '/makola/'  # where to go after login
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Bootcamp API",
+    "DESCRIPTION": "Bootcamp API Documentation",
+    "VERSION": "1.0.0",
+}
